@@ -12,7 +12,8 @@
     "docs:generate": "node scripts/generate-docs.mjs",
     "codex:watch": "node scripts/codex-watch.mjs",
     "si": "node scripts/si.mjs",
-    "codex:sync-environments": "node scripts/sync-codex-environments.mjs"
+    "codex:sync-environments": "node scripts/sync-codex-environments.mjs",
+    "codex:propagate-ci": "node scripts/propagate-ci-workflow.mjs"
   },
   "devDependencies": {
     "node-fetch": "^3.3.2"
