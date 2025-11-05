@@ -1,0 +1,13 @@
+{
+  "name": "sovereign-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monorepo workspace for Sovereign Intelligence",
+  "packageManager": "pnpm@8.15.8",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "test": "pnpm -r run test",
+    "bootstrap:avot": "node scripts/bootstrap-avot.mjs"
+  }
+}

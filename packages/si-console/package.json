@@ -1,0 +1,19 @@
+{
+  "name": "@sovereign-intelligence/si-console",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "echo \"lint not yet configured for si-console\"",
+    "test": "echo \"tests not yet implemented for si-console\""
+  },
+  "dependencies": {
+    "@sovereign-intelligence/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
