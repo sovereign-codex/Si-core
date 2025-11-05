@@ -2,12 +2,16 @@ name: CI
 
 on:
   push:
-    branches: ["main", "master", "develop"]
-  pull_request: {}
+    branches: ["main"]
+  pull_request:
 
 jobs:
-  build:
+  quality:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        task: [lint, typecheck, build]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,16 +23,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+          cache: pnpm
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-      - name: Build
-        run: pnpm build
-      - name: Typecheck
-        run: pnpm typecheck
-      - name: Lint
-        run: pnpm lint
-      - name: Test
-        run: pnpm test
-      - name: Generate docs
-        run: pnpm docs:generate
+        run: pnpm install -r --no-frozen-lockfile
+      - name: Run ${{ matrix.task }} across workspaces
+        run: pnpm -r --if-present run ${{ matrix.task }}

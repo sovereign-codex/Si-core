@@ -1,10 +1,34 @@
+# Dependencies
 node_modules/
 .pnpm-store/
-dist/
-.DS_Store
-.env
 
-# Editor directories and files
+# Build outputs
+/dist/
+/build/
+/.turbo/
+/.next/
+/out/
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# Environment
+.env
+.env.*
+.env.local
+
+# Editor state
 .vscode/
 .idea/
-*.log
+*.swp
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo

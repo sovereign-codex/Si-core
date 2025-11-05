@@ -1,55 +1,57 @@
-# Sovereign Codex Monorepo
+# Sovereign Intelligence Monorepo
 
-This repository hosts the multi-package workspace for Sovereign Codex. It is managed with [pnpm](https://pnpm.io/) and is organized into a collection of packages that target different runtime surfaces across the platform.
+Welcome to the Sovereign Intelligence core workspace. This repository is organised as a pnpm-powered monorepo that houses every first-party application, reusable package, automation script, and documentation source for the platform.
 
-## Workspace Layout
+## Repository layout
 
-| Package | Description |
-| ------- | ----------- |
-| `@sovereign-codex/si-core` | Core services, ingestion, and foundational business logic. |
-| `@sovereign-codex/si-console` | Administrative console and orchestration tooling. |
-| `@sovereign-codex/avot` | AVOT service implementations and extensions. |
-| `@sovereign-codex/lattice` | Graph and lattice-processing components. |
-| `@sovereign-codex/manifests` | Distribution manifests and schema definitions. |
-| `@sovereign-codex/shared-utils` | Shared type definitions and utility helpers used across packages. |
-| `@sovereign-codex/docs` | Source for public and internal documentation. |
+```
+/apps      Application frontends, backends, and services.
+/packages  Shareable libraries and domain packages published internally.
+/scripts   Developer tooling, automation utilities, and maintenance tasks.
+/docs      Product and engineering documentation sources.
+```
 
-## Getting Started
+Each workspace is managed as an independent package and can expose scripts that participate in the shared automation described below.
 
-1. Install pnpm if necessary:
+## Prerequisites
 
-   ```bash
-   corepack enable
-   corepack prepare pnpm@latest --activate
-   ```
+- [Node.js 20+](https://nodejs.org/) with [corepack](https://nodejs.org/api/corepack.html) enabled.
+- [pnpm](https://pnpm.io/) (automatically provisioned when corepack is enabled).
 
-2. Install dependencies for every workspace package:
+## Getting started
 
-   ```bash
-   pnpm install
-   ```
+```bash
+corepack enable
+corepack prepare pnpm@latest --activate
+pnpm install -r
+```
 
-3. Run scripts across the workspace as needed:
+The install step resolves dependencies for every workspace and links cross-package references via `workspace:*` ranges.
 
-   ```bash
-   pnpm -r run build
-   pnpm -r run lint
-   ```
+## Common scripts
 
-4. Bootstrap a new AVOT agent package stub:
+To run a script across every workspace package use the recursive pnpm runner:
 
-   ```bash
-   pnpm si new my-new-service
-   ```
+```bash
+pnpm -r --if-present run build
+pnpm -r --if-present run lint
+pnpm -r --if-present run test
+```
 
-This creates a new agent package inside `packages/avot/` using the shared template.
+Individual workspaces can also be targeted using pnpm filters, for example:
 
-## Conventions
+```bash
+pnpm --filter @sovereign-intelligence/si-core run dev
+```
 
-- TypeScript configuration is shared through `tsconfig.base.json` at the repository root.
-- Workspace packages reference each other through `workspace:*` ranges so local changes are immediately available without publishing.
-- Utilities and type definitions that are shared between packages should live in `packages/shared-utils`.
+## TypeScript configuration
+
+Shared compiler options live in [`tsconfig.base.json`](./tsconfig.base.json). Workspaces should extend this base file to inherit strict compiler settings and path aliases for internal imports.
+
+## Continuous integration
+
+GitHub Actions validates every pull request and push to `main` by installing dependencies once and running lint, type-check, and build tasks across all workspaces. Additional quality gates can be added per-package by exposing scripts with matching names.
 
 ## License
 
-This repository is maintained by the Sovereign Codex team. Additional licensing details will be provided in future updates.
+Copyright © Sovereign Intelligence. All rights reserved.
