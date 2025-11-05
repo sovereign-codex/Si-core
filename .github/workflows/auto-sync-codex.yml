@@ -1,0 +1,13 @@
+name: Auto Sync Codex
+on:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Ping: $(date)" >> sync.log
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Auto sync"
