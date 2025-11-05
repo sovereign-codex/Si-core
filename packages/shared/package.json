@@ -1,0 +1,19 @@
+{
+  "name": "@sovereign-intelligence/shared",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "lint": "echo \"lint not yet configured for @sovereign-intelligence/shared\"",
+    "test": "echo \"tests not yet implemented for @sovereign-intelligence/shared\""
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "rimraf": "^5.0.5"
+  }
+}
