@@ -1,6 +1,6 @@
 # Documentation
 
-The documentation workspace contains published guides, API references, and internal knowledge for Sovereign Intelligence.
+The documentation workspace aggregates guides, API references, and internal knowledge for Sovereign Intelligence. Phase 2 imports will map any standalone documentation repositories to `/docs/<repo>` so they can live alongside generated references.
 
 ## Structure
 
@@ -12,3 +12,4 @@ The documentation workspace contains published guides, API references, and inter
 - Keep content in Markdown and use relative links when referencing other files within the repository.
 - Include front-matter metadata when publishing to external sites so downstream tooling can consume it.
 - Run `pnpm docs:generate` after updating source schemas to refresh generated artifacts.
+- Annotate imports from legacy documentation repos with their original URLs for traceability.

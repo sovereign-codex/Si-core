@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2025-11-05T19:30:54Z",
+  "organization": "sovereign-codex",
+  "repositories": [
+    {
+      "name": "avot",
+      "monorepoPath": "packages/avot",
+      "status": "active",
+      "defaultBranch": "main",
+      "category": "package",
+      "lastImportedSha": null
+    },
+    {
+      "name": "avot-convergence",
+      "monorepoPath": "packages/avot-convergence",
+      "status": "active",
+      "defaultBranch": "main",
+      "category": "package",
+      "lastImportedSha": null
+    },
+    {
+      "name": "docs",
+      "monorepoPath": "docs/docs",
+      "status": "active",
+      "defaultBranch": "main",
+      "category": "docs",
+      "lastImportedSha": null
+    },
+    {
+      "name": "lattice",
+      "monorepoPath": "packages/lattice",
+      "status": "active",
+      "defaultBranch": "main",
+      "category": "package",
+      "lastImportedSha": null
+    },
+    {
+      "name": "manifests",
+      "monorepoPath": "packages/manifests",
+      "status": "active",
+      "defaultBranch": "main",
+      "category": "package",
+      "lastImportedSha": null
+    },
+    {
+      "name": "shared-utils",
+      "monorepoPath": "packages/shared-utils",
+      "status": "active",
+      "defaultBranch": "main",
+      "category": "package",
+      "lastImportedSha": null
+    },
+    {
+      "name": "si-console",
+      "monorepoPath": "packages/si-console",
+      "status": "active",
+      "defaultBranch": "main",
+      "category": "package",
+      "lastImportedSha": null
+    },
+    {
+      "name": "si-core",
+      "monorepoPath": "packages/si-core",
+      "status": "active",
+      "defaultBranch": "main",
+      "category": "package",
+      "lastImportedSha": null
+    }
+  ]
+}
