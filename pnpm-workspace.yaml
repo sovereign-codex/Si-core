@@ -1,5 +1,9 @@
 packages:
   - "apps/*"
+  - "apps/*/*"
   - "packages/*"
-  - "scripts/*"
+  - "packages/*/*"
   - "docs"
+  - "docs/*"
+  - "scripts/*"
+  - "legacy/*"
