@@ -1,31 +1,42 @@
-# Phase 2 — Sovereign Codex Monorepo Migration Plan
+# Phase 3 — Sovereign Codex Monorepo Migration Plan
 
-Phase 2 prepares the Si-core monorepo to absorb every public repository from the `sovereign-codex` GitHub organisation. Because the execution environment cannot reach github.com, the inventory below captures the known catalogue based on internal manifests and workspace packages. Default branches are inferred from current conventions (`main` for active repositories).
+Phase 3 finalises the Sovereign Codex migration by importing **every** repository
+from the `sovereign-codex` GitHub organisation into the Si-core monorepo. The
+process is now fully automated through `scripts/monorepo-import.sh`, which uses
+the GitHub API to enumerate repositories, detect their default branches, and add
+them to the workspace via full-history `git subtree` operations.
 
-## Repository Mapping
+## Repository Mapping (auto-generated)
+
+The table below is updated each time the import script runs. Every repository is
+categorised into the default monorepo layout (`apps/`, `packages/`, `docs/`,
+`scripts/`, `infra/`, or `archive/`).
 
 | Repository | Monorepo Path | Status | Default Branch | Notes |
 | --- | --- | --- | --- | --- |
-| avot | packages/avot | active | main | Core Avot SDK that other agents consume. Import as a standalone package workspace. |
-| avot-convergence | packages/avot-convergence | active | main | Agent implementation built on Avot. Keep separate so releases remain independent. |
-| docs | docs/docs | active | main | Documentation sources and automation scripts. Will sit under `/docs` beside generated reference material. |
-| lattice | packages/lattice | active | main | Shared lattice primitives referenced by automation tooling. |
-| manifests | packages/manifests | active | main | Distribution of schema and manifest utilities. |
-| shared-utils | packages/shared-utils | active | main | Cross-cutting utilities shared by multiple packages and apps. |
-| si-console | packages/si-console | active | main | Developer console CLI; retains workspace links to other packages. |
-| si-core | packages/si-core | active | main | Core service APIs. Import over the existing stub once repositories converge. |
-
-> **Note:** Repositories not listed here could not be discovered offline. Update this plan and `codex-import-map.json` once additional sources are identified.
+<!-- BEGIN MONOREPO-IMPORT TABLE -->
+| _No repositories discovered._ |  |  |  |  |
+<!-- END MONOREPO-IMPORT TABLE -->
 
 ## Import Sequencing
 
-1. Run `scripts/monorepo-import.sh` to pull each repository into the staged directory listed above. The script uses `git subtree add` so history is preserved without grafting submodules.
-2. After each import, commit the result on a dedicated branch and update `codex-import-map.json` with the new `lastImportedSha`.
-3. Re-run workspace validation (`pnpm install`, `pnpm -r --if-present run lint`, `pnpm -r --if-present run build`) to confirm the subtree fits within the existing tooling.
-4. For dormant or legacy repositories discovered later, place them under `/legacy/<repo>` and document the dormancy reason in that folder's `README.md`.
+1. Trigger the **Phase 3: Import ALL repos (full history)** workflow dispatch or
+   run `bash scripts/monorepo-import.sh` locally with a `GH_PAT` token that can
+   read the organisation.
+2. The script enumerates repositories, determines category placement, and runs
+   `git subtree add` (or `git subtree pull` for updates) without `--squash` so
+   full history is preserved.
+3. Repository metadata is written to `codex-import-map.json`, and the README
+   index is refreshed at `docs/INDEX.md`.
+4. Commit the changes on branch `codex/import-all-repos` and open/refresh the PR
+   titled **"Phase 3: Import ALL repos (full history)"**.
 
-## Open Questions
+## Operational Notes
 
-- Confirm default branches for each repository once network access is available. Adjust the import script to use the authoritative branch names before executing live.
-- Determine whether any repositories should be consolidated (for example, nested Avot agents) or remain separate workspaces.
-- Identify repositories containing large assets to evaluate whether Git LFS or alternative storage is required.
+- README merge policy: each imported repository keeps its `README.md` in-place.
+  The script adds a relative link in `docs/INDEX.md` so documentation consumers
+  can browse every project from a single entry point.
+- Classification heuristics: repository metadata (name + topics) guides
+  placement. Archived repositories are automatically routed to `/archive`.
+- CI guardrails: quality checks skip when the workspace is empty, ensuring the
+  monorepo stays green before the first import lands.
