@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../manifests/avot.schema.json",
+  "id": "avot:template",
+  "name": "Template Agent",
+  "version": "0.1.0",
+  "entry": "./dist/index.js",
+  "description": "{{name}} agent generated from Sovereign Codex template.",
+  "tags": ["agent", "template"],
+  "metadata": {
+    "origin": "template"
+  }
+}

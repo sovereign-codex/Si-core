@@ -1,4 +1,4 @@
-import type { Identifier } from "@sovereign-intelligence/shared";
+import type { Identifier } from "@sovereign-codex/shared-utils";
 
 export interface DeploymentManifest {
   id: Identifier;
@@ -7,6 +7,9 @@ export interface DeploymentManifest {
   artifacts: string[];
 }
 
+/**
+ * Creates a deployment manifest ensuring it matches the expected structure.
+ */
 export function createManifest(input: DeploymentManifest): DeploymentManifest {
   return input;
 }

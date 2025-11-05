@@ -1,5 +1,5 @@
 {
-  "name": "@sovereign-intelligence/si-core",
+  "name": "@sovereign-codex/si-core",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,10 +8,11 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "echo \"lint not yet configured for si-core\"",
-    "test": "echo \"tests not yet implemented for si-core\""
+    "test": "echo \"tests not yet implemented for si-core\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@sovereign-intelligence/shared": "workspace:*"
+    "@sovereign-codex/shared-utils": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.4.5"

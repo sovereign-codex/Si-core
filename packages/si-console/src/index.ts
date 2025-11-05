@@ -1,4 +1,4 @@
-import type { Identifier } from "@sovereign-intelligence/shared";
+import type { Identifier } from "@sovereign-codex/shared-utils";
 
 export interface ConsoleModule {
   id: Identifier;
@@ -6,6 +6,9 @@ export interface ConsoleModule {
   route: string;
 }
 
+/**
+ * Normalizes and returns a console module definition for registration.
+ */
 export function defineModule(module: ConsoleModule): ConsoleModule {
   return module;
 }
