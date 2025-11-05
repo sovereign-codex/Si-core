@@ -1,0 +1,22 @@
+{
+  "name": "@sovereign-codex/avot-convergence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "manifest.json", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "echo \"lint not yet configured for avot-convergence\"",
+    "test": "echo \"tests not yet implemented for avot-convergence\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@sovereign-codex/shared-utils": "workspace:*",
+    "@sovereign-codex/avot": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

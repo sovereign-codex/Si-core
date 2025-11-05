@@ -1,4 +1,4 @@
-import type { Identifier } from "@sovereign-intelligence/shared";
+import type { Identifier } from "@sovereign-codex/shared-utils";
 
 export interface LatticeNode {
   id: Identifier;
@@ -13,6 +13,9 @@ export interface LatticeGraph {
   edges: LatticeEdge[];
 }
 
+/**
+ * Creates an empty lattice graph ready for population.
+ */
 export function createGraph(): LatticeGraph {
   return { nodes: [], edges: [] };
 }

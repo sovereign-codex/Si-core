@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sovereign Codex AVOT Manifest",
+  "type": "object",
+  "required": ["id", "name", "version", "entry"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional schema reference for tooling"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^avot:[a-z0-9-]+$",
+      "description": "Canonical identifier for the agent"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human readable agent name"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the agent"
+    },
+    "entry": {
+      "type": "string",
+      "description": "Relative path to the compiled entrypoint"
+    },
+    "description": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

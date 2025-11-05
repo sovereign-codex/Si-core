@@ -1,9 +1,9 @@
-# `@sovereign-intelligence/lattice`
+# `@sovereign-codex/lattice`
 
-Graph and lattice-processing utilities for Sovereign Intelligence.
+Graph and lattice-processing utilities for Sovereign Codex.
 
 ## Building
 
 ```bash
-pnpm --filter @sovereign-intelligence/lattice build
+pnpm --filter @sovereign-codex/lattice build
 ```

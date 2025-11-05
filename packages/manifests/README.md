@@ -1,9 +1,9 @@
-# `@sovereign-intelligence/manifests`
+# `@sovereign-codex/manifests`
 
-Schema and manifest definitions for deploying Sovereign Intelligence artifacts.
+Schema and manifest definitions for deploying Sovereign Codex artifacts.
 
 ## Building
 
 ```bash
-pnpm --filter @sovereign-intelligence/manifests build
+pnpm --filter @sovereign-codex/manifests build
 ```

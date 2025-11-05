@@ -1,5 +1,5 @@
-import type { Identifier } from "@sovereign-intelligence/shared";
-import { isoDate } from "@sovereign-intelligence/shared";
+import type { Identifier } from "@sovereign-codex/shared-utils";
+import { isoDate } from "@sovereign-codex/shared-utils";
 
 export interface AvotRepositoryConfig {
   id: Identifier;
@@ -7,6 +7,9 @@ export interface AvotRepositoryConfig {
   createdAt: Date;
 }
 
+/**
+ * Formats a short summary string for the provided repository configuration.
+ */
 export function formatRepositorySummary(config: AvotRepositoryConfig): string {
   return `${config.name} [${config.id}] created ${isoDate(config.createdAt)}`;
 }

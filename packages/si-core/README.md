@@ -1,6 +1,6 @@
-# `@sovereign-intelligence/si-core`
+# `@sovereign-codex/si-core`
 
-The core runtime services and ingestion pipelines that power Sovereign Intelligence. This package will eventually expose service orchestrators, ingestion flows, and foundational domain models.
+The core runtime services and ingestion pipelines that power Sovereign Codex. This package will eventually expose service orchestrators, ingestion flows, and foundational domain models.
 
 ## Development Goals
 
@@ -11,5 +11,5 @@ The core runtime services and ingestion pipelines that power Sovereign Intellige
 ## Building
 
 ```bash
-pnpm --filter @sovereign-intelligence/si-core build
+pnpm --filter @sovereign-codex/si-core build
 ```

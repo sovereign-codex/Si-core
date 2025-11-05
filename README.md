@@ -1,18 +1,18 @@
-# Sovereign Intelligence Monorepo
+# Sovereign Codex Monorepo
 
-This repository hosts the multi-package workspace for Sovereign Intelligence. It is managed with [pnpm](https://pnpm.io/) and is organized into a collection of packages that target different runtime surfaces across the platform.
+This repository hosts the multi-package workspace for Sovereign Codex. It is managed with [pnpm](https://pnpm.io/) and is organized into a collection of packages that target different runtime surfaces across the platform.
 
 ## Workspace Layout
 
 | Package | Description |
 | ------- | ----------- |
-| `@sovereign-intelligence/si-core` | Core services, ingestion, and foundational business logic. |
-| `@sovereign-intelligence/si-console` | Administrative console and orchestration tooling. |
-| `@sovereign-intelligence/avot` | AVOT service implementations and extensions. |
-| `@sovereign-intelligence/lattice` | Graph and lattice-processing components. |
-| `@sovereign-intelligence/manifests` | Distribution manifests and schema definitions. |
-| `@sovereign-intelligence/shared` | Shared type definitions and utility helpers used across packages. |
-| `@sovereign-intelligence/docs` | Source for public and internal documentation. |
+| `@sovereign-codex/si-core` | Core services, ingestion, and foundational business logic. |
+| `@sovereign-codex/si-console` | Administrative console and orchestration tooling. |
+| `@sovereign-codex/avot` | AVOT service implementations and extensions. |
+| `@sovereign-codex/lattice` | Graph and lattice-processing components. |
+| `@sovereign-codex/manifests` | Distribution manifests and schema definitions. |
+| `@sovereign-codex/shared-utils` | Shared type definitions and utility helpers used across packages. |
+| `@sovereign-codex/docs` | Source for public and internal documentation. |
 
 ## Getting Started
 
@@ -36,20 +36,20 @@ This repository hosts the multi-package workspace for Sovereign Intelligence. It
    pnpm -r run lint
    ```
 
-4. Bootstrap a new AVOT package stub:
+4. Bootstrap a new AVOT agent package stub:
 
    ```bash
-   pnpm bootstrap:avot my-new-service
+   pnpm si new my-new-service
    ```
 
-This creates a new package inside `packages/avot/` using the shared template.
+This creates a new agent package inside `packages/avot/` using the shared template.
 
 ## Conventions
 
 - TypeScript configuration is shared through `tsconfig.base.json` at the repository root.
 - Workspace packages reference each other through `workspace:*` ranges so local changes are immediately available without publishing.
-- Utilities and type definitions that are shared between packages should live in `packages/shared`.
+- Utilities and type definitions that are shared between packages should live in `packages/shared-utils`.
 
 ## License
 
-This repository is maintained by the Sovereign Intelligence team. Additional licensing details will be provided in future updates.
+This repository is maintained by the Sovereign Codex team. Additional licensing details will be provided in future updates.

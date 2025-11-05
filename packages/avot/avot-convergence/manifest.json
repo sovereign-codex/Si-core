@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../manifests/avot.schema.json",
+  "id": "avot:convergence",
+  "name": "Avot Convergence",
+  "version": "0.1.0",
+  "entry": "./dist/index.js",
+  "description": "Core convergence orchestrator agent.",
+  "tags": ["agent", "convergence"],
+  "metadata": {
+    "maintainer": "Sovereign Codex",
+    "generatedAt": "2024-01-01T00:00:00.000Z"
+  }
+}
