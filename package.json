@@ -11,6 +11,10 @@
     "typecheck": "pnpm -r run typecheck --if-present",
     "docs:generate": "node scripts/generate-docs.mjs",
     "codex:watch": "node scripts/codex-watch.mjs",
-    "si": "node scripts/si.mjs"
+    "si": "node scripts/si.mjs",
+    "codex:sync-environments": "node scripts/sync-codex-environments.mjs"
+  },
+  "devDependencies": {
+    "node-fetch": "^3.3.2"
   }
 }
