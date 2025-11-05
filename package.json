@@ -1,0 +1,9 @@
+{
+  "name": "si-core",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "si": "node scripts/si.mjs"
+  }
+}
