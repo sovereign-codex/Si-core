@@ -15,4 +15,8 @@ The workspace-level `pnpm si` command proxies into this package. Use it to scaff
 ```bash
 pnpm si new my-agent
 pnpm si ui
+pnpm si run create-monorepo-phase-2 --enable-auto-sync --include-dashboard --token SOVEREIGN_IMPORT_TOKEN --open-pr
 ```
+
+Running the automation task above records the requested options in `manifests/monorepo-phase-2.config.json` so follow-up tooling
+can determine how to execute Phase 2 of the monorepo import.

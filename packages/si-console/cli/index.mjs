@@ -7,6 +7,158 @@ function log(message) {
   process.stdout.write(`${message}\n`);
 }
 
+function parseRunFlags(args) {
+  const flags = {
+    enableAutoSync: false,
+    includeDashboard: false,
+    openPr: false,
+    tokenEnvVar: null
+  };
+
+  const unknown = [];
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+
+    if (arg === "--enable-auto-sync") {
+      flags.enableAutoSync = true;
+      continue;
+    }
+
+    if (arg === "--include-dashboard") {
+      flags.includeDashboard = true;
+      continue;
+    }
+
+    if (arg === "--open-pr") {
+      flags.openPr = true;
+      continue;
+    }
+
+    if (arg === "--token") {
+      const value = args[index + 1];
+      if (!value || value.startsWith("--")) {
+        throw new Error("Missing value for --token option.");
+      }
+      flags.tokenEnvVar = value;
+      index += 1;
+      continue;
+    }
+
+    if (arg.startsWith("--token=")) {
+      const [, value] = arg.split("=", 2);
+      if (!value) {
+        throw new Error("Missing value for --token option.");
+      }
+      flags.tokenEnvVar = value;
+      continue;
+    }
+
+    unknown.push(arg);
+  }
+
+  if (unknown.length > 0) {
+    throw new Error(`Unknown options: ${unknown.join(", ")}`);
+  }
+
+  return flags;
+}
+
+async function loadPhaseTwoConfig(configPath) {
+  try {
+    const contents = await fs.readFile(configPath, "utf8");
+    const parsed = JSON.parse(contents);
+    if (!parsed || typeof parsed !== "object") {
+      return { task: "create-monorepo-phase-2", history: [], lastRun: null };
+    }
+    parsed.history = Array.isArray(parsed.history) ? parsed.history : [];
+    parsed.task = parsed.task ?? "create-monorepo-phase-2";
+    return parsed;
+  } catch (error) {
+    if (error && error.code !== "ENOENT") {
+      throw error;
+    }
+    return { task: "create-monorepo-phase-2", history: [], lastRun: null };
+  }
+}
+
+async function savePhaseTwoConfig(configPath, config) {
+  await fs.mkdir(path.dirname(configPath), { recursive: true });
+  await fs.writeFile(configPath, JSON.stringify(config, null, 2) + "\n");
+}
+
+async function runCreateMonorepoPhaseTwo({ workspaceRoot, flags }) {
+  const configPath = path.join(workspaceRoot, "manifests", "monorepo-phase-2.config.json");
+  const config = await loadPhaseTwoConfig(configPath);
+
+  const tokenEnvVar = flags.tokenEnvVar ?? "SOVEREIGN_IMPORT_TOKEN";
+  const tokenAvailable = Boolean(process.env[tokenEnvVar]);
+
+  const runAt = new Date().toISOString();
+  const record = {
+    runAt,
+    autoSyncEnabled: Boolean(flags.enableAutoSync),
+    includeDashboard: Boolean(flags.includeDashboard),
+    openPrRequested: Boolean(flags.openPr),
+    tokenEnvVar,
+    tokenDetected: tokenAvailable
+  };
+
+  if (!tokenAvailable) {
+    record.warnings = [`Environment variable ${tokenEnvVar} is not set.`];
+  }
+
+  const history = Array.isArray(config.history) ? [...config.history, record] : [record];
+  const MAX_HISTORY = 20;
+  while (history.length > MAX_HISTORY) {
+    history.shift();
+  }
+
+  config.history = history;
+  config.lastRun = record;
+
+  await savePhaseTwoConfig(configPath, config);
+
+  log("Monorepo Phase 2 automation configured:");
+  log(`  auto sync: ${record.autoSyncEnabled ? "enabled" : "disabled"}`);
+  log(`  dashboard: ${record.includeDashboard ? "included" : "skipped"}`);
+  log(`  open PR: ${record.openPrRequested ? "requested" : "not requested"}`);
+  log(`  token env: ${tokenEnvVar} (${tokenAvailable ? "detected" : "missing"})`);
+  if (record.includeDashboard) {
+    log("  hint: run `pnpm si ui` in a separate terminal to launch the dashboard.");
+  }
+  if (record.openPrRequested) {
+    log("  hint: use your git provider CLI to open a PR after imports complete.");
+  }
+  if (!tokenAvailable) {
+    log(`Warning: environment variable ${tokenEnvVar} is not defined. Imports may fail.`);
+  }
+  log("");
+  log(`Configuration written to ${path.relative(workspaceRoot, configPath)}`);
+}
+
+async function runAutomationTask({ task, args, workspaceRoot }) {
+  if (!task || task === "help" || task === "--help" || task === "-h") {
+    log("Automation tasks:");
+    log("  create-monorepo-phase-2  Configure the Phase 2 monorepo import workflow.");
+    log("");
+    log("Flags:");
+    log("  --enable-auto-sync      Mark auto-sync as enabled for subsequent runs.");
+    log("  --include-dashboard     Record that the dashboard should be launched.");
+    log("  --open-pr               Indicate that a follow-up PR should be opened.");
+    log("  --token <ENV>           Name of the env var providing the GitHub token.");
+    return;
+  }
+
+  if (task === "create-monorepo-phase-2") {
+    const flags = parseRunFlags(args);
+    await runCreateMonorepoPhaseTwo({ workspaceRoot, flags });
+    return;
+  }
+
+  throw new Error(`Unknown automation task: ${task}`);
+}
+
 function toSlug(value) {
   return value
     .trim()
@@ -182,6 +334,7 @@ export async function runConsole({ args, workspaceRoot }) {
     log("Commands:");
     log("  new <name>   Create a new AVOT agent package from the manifest template.");
     log("  ui           Launch the local agent/lattice dashboard.");
+    log("  run          Execute Codex automation tasks (see `codex run --help`).");
     return;
   }
 
@@ -197,6 +350,12 @@ export async function runConsole({ args, workspaceRoot }) {
 
   if (command === "ui") {
     await startUi({ workspaceRoot });
+    return;
+  }
+
+  if (command === "run") {
+    const [task, ...taskArgs] = rest;
+    await runAutomationTask({ task, args: taskArgs, workspaceRoot });
     return;
   }
 

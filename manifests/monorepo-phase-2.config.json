@@ -1,0 +1,27 @@
+{
+  "task": "create-monorepo-phase-2",
+  "history": [
+    {
+      "runAt": "2025-11-06T03:07:13.314Z",
+      "autoSyncEnabled": true,
+      "includeDashboard": true,
+      "openPrRequested": true,
+      "tokenEnvVar": "SOVEREIGN_IMPORT_TOKEN",
+      "tokenDetected": false,
+      "warnings": [
+        "Environment variable SOVEREIGN_IMPORT_TOKEN is not set."
+      ]
+    }
+  ],
+  "lastRun": {
+    "runAt": "2025-11-06T03:07:13.314Z",
+    "autoSyncEnabled": true,
+    "includeDashboard": true,
+    "openPrRequested": true,
+    "tokenEnvVar": "SOVEREIGN_IMPORT_TOKEN",
+    "tokenDetected": false,
+    "warnings": [
+      "Environment variable SOVEREIGN_IMPORT_TOKEN is not set."
+    ]
+  }
+}
