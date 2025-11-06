@@ -44,3 +44,7 @@ categorised into the default monorepo layout (`apps/`, `packages/`, `docs/`,
   command. When the `codex` binary is not installed locally, run
   `scripts/monorepo-import.sh` instead so the migration plan and import map stay
   current.
+- Local automation: run `pnpm si run create-monorepo-phase-2 --help` to record
+  configuration for Phase 2 imports in `manifests/monorepo-phase-2.config.json`.
+  The automation metadata tracks whether auto-sync, dashboard previews, or PR
+  follow-ups should be triggered when executing the import tooling.
