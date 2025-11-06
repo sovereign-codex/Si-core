@@ -40,3 +40,7 @@ categorised into the default monorepo layout (`apps/`, `packages/`, `docs/`,
   placement. Archived repositories are automatically routed to `/archive`.
 - CI guardrails: quality checks skip when the workspace is empty, ensuring the
   monorepo stays green before the first import lands.
+- CLI availability: the automation also supports the `codex import-sovereign-repos`
+  command. When the `codex` binary is not installed locally, run
+  `scripts/monorepo-import.sh` instead so the migration plan and import map stay
+  current.
