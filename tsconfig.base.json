@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "baseUrl": ".",
+    "paths": {
+      "@si/apps/*": ["apps/*/src"],
+      "@si/packages/*": ["packages/*/src"],
+      "@si/scripts/*": ["scripts/*/src"],
+      "@si/*": ["packages/*/src", "apps/*/src"],
+      "@workspace/apps/*": ["apps/*/src"],
+      "@workspace/packages/*": ["packages/*/src"],
+      "@workspace/docs/*": ["docs/*/src"],
+      "@workspace/legacy/*": ["legacy/*/src"],
+      "@workspace/resources/*": ["resources/*"],
+      "@sovereign-codex/*": ["packages/*/src", "apps/*/src", "legacy/*/src"]
+    }
+  },
+  "include": [
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "scripts/**/*.ts",
+    "docs/**/*.ts",
+    "legacy/**/*.ts",
+    "legacy/**/*.tsx",
+    "resources/**/*.ts",
+    "resources/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@sovereign-codex/shared-utils",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "lint": "echo \"lint not yet configured for @sovereign-codex/shared-utils\"",
+    "test": "echo \"tests not yet implemented for @sovereign-codex/shared-utils\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "rimraf": "^5.0.5"
+  }
+}

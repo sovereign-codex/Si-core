@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        task: [lint, typecheck, build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.15.8
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install -r --no-frozen-lockfile
+      - name: Run ${{ matrix.task }} across workspaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          workspace_json=$(pnpm m ls --depth -1 --json || echo "[]")
+          workspace_count=$(node -e "const input = process.argv[1]; try { const data = JSON.parse(input); console.log(Array.isArray(data) ? data.length : 0); } catch (_) { console.log(0); }" "${workspace_json}")
+          if [[ "${workspace_count}" -eq 0 ]]; then
+            echo "No PNPM workspaces detected. Skipping ${{ matrix.task }}."
+            exit 0
+          fi
+          pnpm -r --if-present run ${{ matrix.task }}

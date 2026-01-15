@@ -1,0 +1,11 @@
+{
+  "name": "@sovereign-codex/docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo \"Docs build placeholder\"",
+    "lint": "echo \"Docs lint placeholder\"",
+    "test": "echo \"Docs test placeholder\"",
+    "typecheck": "echo \"Docs typecheck placeholder\""
+  }
+}
